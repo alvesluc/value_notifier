@@ -16,4 +16,18 @@ class AlbumService {
 
     return albums;
   }
+
+  Future<AlbumModel> addAlbum() async {
+    String url = 'https://jsonplaceholder.typicode.com/albums';
+
+    final response = await uno.post(url, data: {
+      'title': 'foo',
+      'body': 'bar',
+      'userId': 1,
+    });
+
+    final newAlbum = AlbumModel.fromMap(response.data);
+    
+    return newAlbum;
+  }
 }

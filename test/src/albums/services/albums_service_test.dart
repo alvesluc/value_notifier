@@ -25,6 +25,21 @@ void main() {
     final albums = await service.getAlbums();
     expect(albums[0].title, 'quidem molestiae enim');
   });
+
+  test('Should add a new album', () async {
+    when(() => unoMock.post(any(), data: any(named: 'data'))).thenAnswer(
+      (_) async => Response(
+        headers: {},
+        request: RequestMock(),
+        status: 200,
+        data: {
+          'id': 101
+        },
+      ),
+    );
+    final albums = await service.addAlbum();
+    expect(albums.id, 101);
+  });
 }
 
 final jsonResponse = jsonDecode(r'''

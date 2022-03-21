@@ -51,6 +51,10 @@ class _AlbumsPageState extends State<AlbumsPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Albums')),
       body: child ?? Container(),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: store.addAlbum,
+      ),
     );
   }
 }

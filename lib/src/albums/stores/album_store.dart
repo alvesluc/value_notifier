@@ -8,11 +8,20 @@ class AlbumStore extends ValueNotifier<AlbumState> {
 
   AlbumStore(this._albumService) : super(InitialAlbumState());
 
-  Future getAlbums() async {
+  Future<void> getAlbums() async {
     value = LoadingAlbumState();
     try {
       final albums = await _albumService.getAlbums();
       value = SuccessAlbumState(albums);
+    } catch (e) {
+      value = ErrorAlbumState(e.toString());
+    }
+  }
+  
+  Future<void> addAlbum() async {
+    value = LoadingAlbumState();
+    try {
+      await _albumService.addAlbum();
     } catch (e) {
       value = ErrorAlbumState(e.toString());
     }
